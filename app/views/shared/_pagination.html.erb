@@ -1,0 +1,11 @@
+<% if last_page && last_page > 1 %>
+    <div class="cb-pagination">
+    	<% (1..last_page).each do |page_number| %>
+    		<% if page_number == current_page %>
+    			<strong class="cb-pagination-current"><%= page_number %><strong>&nbsp;
+    		<% else %>
+    			<%= link_to page_number, (request.query_string.present? ? request.original_fullpath+"&page=#{page_number}" : request.original_fullpath + "?page=#{page_number}") %>
+    		<% end %>
+    	<% end %>
+    </div>
+<% end %>

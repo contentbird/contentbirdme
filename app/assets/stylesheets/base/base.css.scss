@@ -1,0 +1,162 @@
+@import "cb-render/globals/all.css.scss";
+
+$medium: 40.063em;
+$large: 64em;
+
+@mixin bp($point) {
+    @if $point == medium {
+        @media only screen and (min-width: $medium)  { @content; }
+    }
+    @else if $point == large {
+        @media only screen and (min-width: $large) { @content; }
+    }
+}
+
+a {
+	color: #46B1FF;
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+h2 {
+	@include bp(large) {
+		text-align: left;
+	}
+	text-align: center;
+}
+
+h3 {
+	margin-bottom: $padding;
+}
+
+h2, h3 {
+	color: $darkGray;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+}
+
+figure {
+	text-align: center;
+}
+
+.cover {
+	@include bp(large) {
+		position: fixed;
+		width: 30%;
+		height: 100%;
+		padding: $padding;
+	}
+	padding: $padding/2;
+	background: #46B1FF;
+	@include cover("globals/back_cbme.jpg");
+	word-wrap: break-word;
+	& h2, & h3 {
+		color: $white;
+	}
+	& h2 {
+		font-weight: bold;
+		margin-bottom: $padding/2;
+	}
+	& a {
+		color: $white;
+	}
+	& [data-icon] {
+	color: $white;
+	padding-top: $padding/2;
+	padding-right: 0;
+	&:before {
+		margin-right: 0;
+	}
+}
+}
+
+.mainNav {
+	@include bp(large) {
+		display: block;
+	}
+	display: none;
+	&.opened {
+		display: block;
+	}
+}
+
+.touchNavLink {
+	@include bp(large) {
+		display: none;
+	}
+	float: right;
+	font-size: $mediumSizeText;
+	line-height: $padding/2;
+}
+
+nav ul {
+	border-left: 3px solid $white;
+	& li {
+		margin-right: 20px;
+		padding-left: 10px;
+		& a {
+			color: $white;
+		}
+		& a.selected {
+			margin-left: -13px;
+			padding-left: 10px;
+			height: 25px;
+			border-left: 3px solid $orange;
+		}
+	}
+}
+
+.powered {
+	@include bp(large) {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: block;
+		padding: $padding;
+		color: $white;
+		& a {
+			color: $white;
+			text-decoration: underline;
+		}
+	}
+	display: none;
+	font-size: $verysmallSizeText;
+}
+
+.main {
+	@include bp(large) {
+		margin-left: 30%;
+		width: 70%;
+	}
+	padding: $padding;
+}
+
+/* cb types */
+.cb-content-detail .cb-type-image {
+	width: 100%;
+}
+
+.cb-content-summary .cb-type-image {
+	@include bp(large) {
+		width: 40%;
+	}
+	width: 100%;
+}
+
+.cb-content-title {
+	text-align: center;
+}
+
+.cb-content-detail,
+.cb-content-summary {
+	border-bottom: 2px solid #f0f0f0;
+}
+
+.logo {
+	border-radius: inherit;
+}

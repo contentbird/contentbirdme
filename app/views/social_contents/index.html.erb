@@ -1,0 +1,19 @@
+<section role="main" class="main">
+    <% @contents.each do |content| %>
+        <% first_image = content['first_image'] ? content['properties'][content['first_image']] : nil %>
+        <% first_text  = content['first_text']  ? content['properties'][content['first_text']]  : nil %>
+        <article class="box">
+        	<header class="box-hd">
+        		<h2 class="cb-content-title"><%= link_to content['title'], social_content_path(content['slug']) %></h2>
+        	</header>
+            <div class="box-bd">
+            	<% if first_image %>
+                    <%= display_content_property(content['first_image'], first_image, wrapper_class: "box--md") %>
+                <% end %>
+                <% if first_text %>
+                    <%= display_content_property content['first_text'], first_text, {display_label: (first_text['type']!='memo'), wrapper_class: "box--ct"} %>
+                <% end %>
+            </div>
+        </article>
+    <% end %>
+</section>

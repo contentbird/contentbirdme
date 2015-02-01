@@ -1,0 +1,16 @@
+<% content_for :load_script do %>
+    H5F.setup($('form'),{invalidClass: "h5fError", requiredClass: "h5fRequired"});
+<% end %>
+<section class="main">
+	<h1 class="cb-<%=@current_section['slug']%>-title"><%= @current_section['title'] %></h1>
+	<%= render 'shared/section_forewords', section: @current_section %>
+    <article>
+    	<%= form_tag create_content_path, method: :post do %>
+        	<%= raw @html_form %>
+            <%= submit_tag t('.submit') %>
+        <% end %>
+    </article>
+    <footer>
+        <%= link_to t('.cancel', section: @current_section['title']), contents_path(@current_section['slug']) %>
+    </footer>
+</section>

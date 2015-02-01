@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @channel['name'] %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    "application",  media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    @channel['css_url'], media: "all", "data-turbolinks-track" => true if @channel['css_url'].present? %>
+  <% if @direct_redirect_url.present? %>
+      <script>window.location.replace('<%= @direct_redirect_url %>');</script>
+  <% end %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= yield :open_graph %>
+  <% unless @channel_type == 'website' %>
+      <meta name="robots" content="noindex, nofollow">
+  <% end %>
+</head>
+<body class="<%= "section-#{@current_section['slug']}" if @current_section %>">
+    <div class="cover"<% if @channel['cover_url'].present? %> style="background: url(<%= @channel['cover_url'] %>) no-repeat center; -webkit-background-size: cover; -o-background-size: cover; background-size: cover;"<% end %>>
+        <header>
+
+            <%= link_to image_tag("globals/contentbird.jpg", class: 'logo'), 'http://www.contentbird.com', target: '_blank' %>
+
+            <% if display_sections = (@sections.present? && @sections.size > 1) %>
+                <%= link_to '' ,'#', id: 'touchNavLink', class: 'touchNavLink', data: {icon: raw("&#xe009;")} %>
+            <% end %>
+
+            <h2 class="channel-name">
+                <%= (@channel_type == 'website' || @channel['allow_social_feed']) ? link_to(@channel['name'], root_path) : @channel['name'] %>
+            </h2>
+
+            <% if @channel['baseline'].present? %>
+                <h3 class="cb-channel-baseline"><%= @channel['baseline'] %></h3>
+            <% end %>
+
+        </header>
+
+        <%= (render 'shared/nav', sections: @sections) if display_sections %>
+
+        <footer class="powered">
+            <%= t('.powered_by') %>&nbsp;<a href="http://www.contentbird.com" target="_blank">ContentBird</a>.<br />
+            <%= t('.tagline') %>
+        </footer>
+    </div>
+    <%= yield %>
+    <div id="modal" style="display: none" class="modal"></div>
+    <div class="modal-overlay"></div>
+    <%= render "cb-render/js_templates" %>
+    <script>
+        $(document).ready(function() {
+            $( "#touchNavLink" ).click(function(e) {
+              $( "#mainNav" ).toggleClass('opened');
+              e.preventDefault();
+            });
+            cb.decorateModal();
+            cb.decorateGalleries();
+            cb.decorateUrls();
+            cb.decorateMarkdownLinks();
+          <%= yield :load_script %>
+        });
+    </script>
+    <%= render "cb-render/tracking/piwik" %>
+</body>
+</html>

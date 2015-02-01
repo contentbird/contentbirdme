@@ -1,0 +1,24 @@
+fr:
+  date:
+    day_names: [ dimanche, lundi, mardi, mercredi, jeudi, vendredi, samedi ]
+    abbr_day_names: [ dim, lun, mar, mer, jeu, ven, sam ]
+    month_names: [ ~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre ]
+    abbr_month_names: [ ~, jan., fév., mars, avr., mai, juin, juil., août, sept., oct., nov., déc. ]
+  time:
+    formats:
+      default: "%d %B %Y à %H:%M"
+  layouts:
+    application:
+      powered_by: Fait avec
+      tagline: La solution de partage qui respecte votre vie privée
+  shared:
+    publication_time: "Publié le %{time}"
+  contents:
+    new:
+      submit: Enregistrer
+      cancel: Annuler
+    show:
+      back_to_section: "« Retour à la liste"
+  social_contents:
+    show:
+      back_to_section: "« Retour à la liste"

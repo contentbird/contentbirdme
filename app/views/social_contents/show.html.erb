@@ -1,0 +1,6 @@
+<section role="main" class="main">
+    <%= render 'shared/content', content: @content %>
+    <footer>
+        <%= (link_to t('.back_to_section'), social_contents_path) if @channel['allow_social_feed'] %>
+    </footer>
+</section>

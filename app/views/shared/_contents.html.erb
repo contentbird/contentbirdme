@@ -1,0 +1,29 @@
+<% if contents.size == 1 %>
+    <%= render 'shared/content', content: contents.first %>
+<% else %>
+    <% contents.each do |content| %>
+        <% first_image = content['first_image'] ? content['properties'][content['first_image']] : nil %>
+        <% first_text  = content['first_text']  ? content['properties'][content['first_text']]  : nil %>
+        <article class="box cb-content-summary <%= "cb-type-#{content['type']}" %>">
+            <header class="box-hd">
+                <h2 class="cb-content-title">
+                    <%= link_to content['title'], content_path(@current_section['slug'], content['slug']) %>
+                </h2>
+            </header>
+            <div class="box-bd">
+                <% if first_image %>
+                    <%= display_content_property(content['first_image'], first_image, wrapper_class: "box--md", summary: true) %>
+                <% end %>
+                <% if first_text %>
+                    <%= display_content_property content['first_text'], first_text, {display_label: (first_text['type']!='memo'), wrapper_class: "box--ct"} %>
+                <% end %>
+                <span class="notabene"><%= t('shared.publication_time', time: l(Time.parse(content['published_at']))) %></span>
+            </div>
+        </article>
+    <% end %>
+	<footer>
+		<%= render(partial: 'shared/pagination',
+			       locals: { current_page: @meta['current_page'],
+							 last_page: @meta['total_pages']      }) if @meta %>
+	</footer>
+<% end %>

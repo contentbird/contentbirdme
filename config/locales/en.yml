@@ -1,0 +1,19 @@
+en:
+  time:
+    formats:
+      default: "%d %B %Y at %H:%M"
+  layouts:
+    application:
+      powered_by: Powered by
+      tagline: A better way to host and share your content
+  shared:
+    publication_time: "Published on %{time}"
+  contents:
+    new:
+      submit: Save
+      cancel: Cancel
+    show:
+      back_to_section: "« Back to the list"
+  social_contents:
+    show:
+      back_to_section: "« Back to the feed"

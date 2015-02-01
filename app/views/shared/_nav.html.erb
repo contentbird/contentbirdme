@@ -1,0 +1,9 @@
+
+<nav id="mainNav" class="mainNav <%= 'nav-large' if sections.size > 6 %>" role="navigation">
+    <ul>
+        <% sections.each do |section| %>
+            <% section_link = (section['mode'] == 'display' ? contents_path(section['slug']) : new_content_path(section['slug'])) %>
+            <li><%= link_to section['title'], section_link, class: (params[:section_slug] == section['slug'] ? 'selected' : '') %></li>
+        <% end %>
+    </ul>
+</nav>

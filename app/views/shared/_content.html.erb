@@ -1,0 +1,17 @@
+<% content_for :open_graph do %>
+    <meta property="og:title"       content="<%= content['title'] %>" />
+    <meta property="og:site_name"   content="ContentBird"             />
+    <% first_text  = content['first_text']  ? content['properties'][content['first_text']]['value'].to_s : content['title'] %>
+    <meta property="og:description" content="<%= truncate(first_text, length: 100, separator: ' ') %>"        />
+    <% if content['thumbnail'].present? %>
+    	<meta property="og:image" content="<%= 'http:' + content['thumbnail']%>" />
+    <% end %>
+<% end %>
+
+<article class="cb-content-detail <%= "cb-type-#{content['type']}" %>">
+    <h2 class="cb-content-title"><%= content['title'] %></h2>
+    <% content['properties'].each do |prop_name, property| %>
+        <%= display_content_property prop_name, property, display_label: (property['type']!='memo') %>
+    <% end %>
+    <p class= "notabene"><%= t('shared.publication_time', time: l(Time.parse(content['published_at']))) %></p>
+</article>

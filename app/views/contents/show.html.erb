@@ -1,0 +1,8 @@
+<section class="main">
+    <%= render 'shared/content', content: @content %>
+    <% if @current_section %>
+        <footer>
+            <%= link_to t('.back_to_section'), contents_path(@current_section['slug']) %>
+        </footer>
+    <% end %>
+</section>

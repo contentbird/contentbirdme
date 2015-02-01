@@ -1,0 +1,5 @@
+<section role="main" class="main">
+    <h1 class="cb-<%=@current_section['slug']%>-title"><%= @current_section['title'] %></h1>
+    <%= render 'shared/section_forewords', section: @current_section %>
+    <%= render 'shared/contents', contents: @contents %>
+</section>
